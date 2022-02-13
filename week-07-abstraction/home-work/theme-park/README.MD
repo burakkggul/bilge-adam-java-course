@@ -24,7 +24,6 @@ Büyük bir gerçek dünya alanını modellemeyi ve aşağıda bulunan java enst
 
 #### Classlar ve Abstract Classlar
 
-Look through the start code and understand what is set up for you already.
 
  - `Visitor` isimli bir sınıf oluşturalım. İçerisinde age, height ve money bilgisi bulunmalıdır.
  - `Attraction` isimli bir soyut sınıf oluşturalım.İçerisinde name, rating and visitCount(0 ile başlayacak) bilgilisi bulunmalıdır.
