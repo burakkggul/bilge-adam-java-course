@@ -11,9 +11,9 @@ git push origin "isim-soyisim-theme-park"
 
 18.02.2022 18.00 tarihine kadar tamamladığınız kadarı ile pull requestlerini oluşturmanız gerekmektedir. Pull request oluşturduktan sonra üzerine çalışmaya devam edip pull requestinizi güncelleyebilirsiniz.
 
-### Öğrenilecek Konular
+### Pekiştirilecek Konular
 
-Büyük bir gerçek dünya alanını modellemeyi ve aşağıda bulunan java enstrümanlarının kullanımı hakkında öğrendiklerinizi uygulayın:
+Büyük bir gerçek dünya alanını modellemeyi ve aşağıda bulunan java enstrümanlarının kullanımı hakkında öğrendiklerinizi uygulamayı pekiştireceksiniz:
 
 * classlar
 * inheritance
