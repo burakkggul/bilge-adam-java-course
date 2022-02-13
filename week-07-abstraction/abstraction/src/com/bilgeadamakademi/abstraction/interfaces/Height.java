@@ -1,7 +1,7 @@
 package com.bilgeadamakademi.abstraction.interfaces;
 
 public interface Height {
-    int a = 0;
+    public final int a = 0;
 
     static String definition(){
         return "Bu interface içerisinde tanımlanmış static bir metoddur";

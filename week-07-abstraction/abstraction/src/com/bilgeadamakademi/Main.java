@@ -13,31 +13,6 @@ public class Main {
         System.out.println(object.heightM());
         System.out.println(object.heightKm());
 
-        Animal snake = new Animal() {
-            @Override
-            public boolean isAlive() {
-                return false;
-            }
-
-            @Override
-            public double heightCm() {
-                return 0;
-            }
-
-            @Override
-            public double heightM() {
-                return 0;
-            }
-
-            @Override
-            public double weightGram() {
-                return 0;
-            }
-
-            @Override
-            public double weightKilogram() {
-                return 0;
-            }
-        };
+       // Animal snake = new Animal();
     }
 }
