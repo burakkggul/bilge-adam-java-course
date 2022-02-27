@@ -13,6 +13,7 @@ public class Main {
         File file = new File("file.txt");
         try {
             fileOutputStream = new FileOutputStream(file);
+            long startDateTime = System.currentTimeMillis();
             fileOutputStream.write(66);
             fileOutputStream.write(85);
             fileOutputStream.write(82);
@@ -25,6 +26,7 @@ public class Main {
             System.out.println(name);
             byte[] nameByteArray = name.getBytes(StandardCharsets.UTF_8);
             fileOutputStream.write(nameByteArray);
+            System.out.println(System.currentTimeMillis()-startDateTime);
         }catch (FileNotFoundException fileNotFoundException){
             System.out.println(fileNotFoundException.getMessage());
         } catch (IOException e) {
