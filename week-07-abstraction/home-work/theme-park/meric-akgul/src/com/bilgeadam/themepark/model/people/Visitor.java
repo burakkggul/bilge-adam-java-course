@@ -1,24 +1,24 @@
-package com.bilgeadam;
+package com.bilgeadam.themepark.model.people;
 
-import com.bilgeadam.model.base.Attraction;
+import com.bilgeadam.themepark.model.attractions.base.Attraction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Visitor {
     private int age;
     private int height;
     private double money;
-    private ArrayList <Attraction> visitedAttractions;
+    private List<Attraction> visitedAttractions = new ArrayList<>();
 
-    public Visitor(int age, int height, double money, ArrayList<Attraction> visitedAttractions) {
+    public Visitor(int age, int height, double money) {
         this.age = age;
         this.height = height;
         this.money = money;
-        this.visitedAttractions = visitedAttractions;
     }
 
     public void addVisited(Attraction attraction){
-        visitedAttractions.add(attraction);
+        this.visitedAttractions.add(attraction);
     }
 
     public int getAge() {

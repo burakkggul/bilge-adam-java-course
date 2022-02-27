@@ -1,6 +1,6 @@
-package com.bilgeadam.interfaces;
+package com.bilgeadam.themepark.interfaces;
 
-import com.bilgeadam.Visitor;
+import com.bilgeadam.themepark.model.people.Visitor;
 
 public interface Ticketed {
     double defaultPrice();
