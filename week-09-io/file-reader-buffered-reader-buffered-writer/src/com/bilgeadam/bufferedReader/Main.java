@@ -1,4 +1,4 @@
-package com.bilgeadam;
+package com.bilgeadam.bufferedReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
