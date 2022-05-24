@@ -41,7 +41,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.bilgeadam.Main</mainClass>
+                                    <mainClass>com.bilgeadam.JDBCApplication</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
