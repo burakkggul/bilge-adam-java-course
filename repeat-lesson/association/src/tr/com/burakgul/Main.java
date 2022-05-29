@@ -1,4 +1,4 @@
-package com.bilgeadam;
+package tr.com.burakgul;
 
 public class Main {
 
