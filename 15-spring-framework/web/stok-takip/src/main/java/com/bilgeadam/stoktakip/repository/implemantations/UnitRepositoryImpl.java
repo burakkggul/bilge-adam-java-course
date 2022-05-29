@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class UnitRepositoryImpl implements UnitRepository {
 
     private final Logger logger = LoggerFactory.getLogger(UnitRepositoryImpl.class);
@@ -67,8 +68,8 @@ public class UnitRepositoryImpl implements UnitRepository {
     }
 
     @Override
-    public void update(Unit unit) {
-
+    public Unit update(Unit unit) {
+        return null;
     }
 
     @Override

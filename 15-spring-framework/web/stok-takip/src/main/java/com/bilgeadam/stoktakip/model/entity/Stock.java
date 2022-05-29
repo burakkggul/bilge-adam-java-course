@@ -1,9 +1,19 @@
 package com.bilgeadam.stoktakip.model.entity;
 
+import com.bilgeadam.stoktakip.model.dto.StockRequest;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Stock {
+    private Long id;
+    private String name;
+    private Integer quantity;
+    private Double boughtPrice;
+    private Double sellPrice;
+    private Long stockCode;
+    private Long barcode;
+    private Long unitId;
 
     public Stock(Long id, String name, Integer quantity,
                  Double boughtPrice, Double sellPrice,
@@ -18,6 +28,27 @@ public class Stock {
         this.unitId = unitId;
     }
 
+    public Stock(StockRequest stockRequest, Long stockCode, Long barcode){
+        this.name = stockRequest.getName();
+        this.quantity = stockRequest.getQuantity();
+        this.boughtPrice = stockRequest.getBoughtPrice();
+        this.sellPrice = stockRequest.getSellPrice();
+        this.stockCode = stockCode;
+        this.barcode = barcode;
+        this.unitId = stockRequest.getUnitId();
+    }
+
+    public Stock(StockRequest stockRequest, Long stockCode, Long barcode, Long id){
+        this.name = stockRequest.getName();
+        this.quantity = stockRequest.getQuantity();
+        this.boughtPrice = stockRequest.getBoughtPrice();
+        this.sellPrice = stockRequest.getSellPrice();
+        this.stockCode = stockCode;
+        this.barcode = barcode;
+        this.unitId = stockRequest.getUnitId();
+        this.id = id;
+    }
+
     public Stock(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getLong("id");
         this.name = resultSet.getString("name");
@@ -28,15 +59,6 @@ public class Stock {
         this.barcode = resultSet.getLong("barcode");
         this.unitId = resultSet.getLong("unit_id");
     }
-
-    private Long id;
-    private String name;
-    private Integer quantity;
-    private Double boughtPrice;
-    private Double sellPrice;
-    private Long stockCode;
-    private Long barcode;
-    private Long unitId;
 
 
     public Long getId() {

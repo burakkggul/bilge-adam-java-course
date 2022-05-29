@@ -5,6 +5,9 @@ import com.bilgeadam.stoktakip.repository.StockRepository;
 import com.bilgeadam.stoktakip.repository.base.CrudRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Repository
 public class StockRepositoryImpl implements StockRepository {
     private final Logger logger = LoggerFactory.getLogger(StockRepositoryImpl.class);
 
@@ -41,14 +44,16 @@ public class StockRepositoryImpl implements StockRepository {
             statement.setInt(2, stock.getQuantity());
             statement.setDouble(3, stock.getBoughtPrice());
             statement.setDouble(4, stock.getSellPrice());
-            statement.setLong(5, stock.getBarcode());
-            statement.setLong(6, stock.getUnitId());
+            statement.setDouble(5, stock.getStockCode());
+            statement.setLong(6, stock.getBarcode());
+            statement.setLong(7, stock.getUnitId());
             statement.executeUpdate();
             logger.info(stock.getBarcode() + " barkodlu stok kaydı başarıyla yapıldı.");
         } catch (SQLException e) {
             logger.error("Kayıt atılırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -67,6 +72,7 @@ public class StockRepositoryImpl implements StockRepository {
             logger.error("Kayıt atılırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return stocks;
     }
@@ -80,19 +86,21 @@ public class StockRepositoryImpl implements StockRepository {
             ResultSet resultSet = statement.getResultSet();
 
             if (resultSet.next()) {
+                logger.info(id + "'id li stok başarıyla getirildi.");
                 return Optional.of(new Stock(resultSet));
             }
-            logger.info(id + "'id li stok başarıyla getirildi.");
+            logger.info(id + "'id li stok bulunamadı.");
         } catch (SQLException e) {
             logger.error("Kayıt atılırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return Optional.empty();
     }
 
     @Override
-    public void update(Stock stock) {
+    public Stock update(Stock stock) {
         String sql = "update stock set " +
                 "name=?, " +
                 "quantity=?, " +
@@ -108,16 +116,19 @@ public class StockRepositoryImpl implements StockRepository {
             statement.setInt(2, stock.getQuantity());
             statement.setDouble(3, stock.getBoughtPrice());
             statement.setDouble(4, stock.getSellPrice());
-            statement.setLong(5, stock.getBarcode());
-            statement.setLong(6, stock.getUnitId());
-            statement.setLong(7, stock.getId());
+            statement.setLong(5, stock.getStockCode());
+            statement.setLong(6, stock.getBarcode());
+            statement.setLong(7, stock.getUnitId());
+            statement.setLong(8, stock.getId());
             statement.executeUpdate();
             logger.info(stock.getBarcode() + " barkodlu stok başarıyla güncelledi.");
         } catch (SQLException e) {
             logger.error("Kayıt atılırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return this.findById(stock.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Beklenmedik bir hata oluştu."));
     }
 
     @Override
@@ -125,12 +136,13 @@ public class StockRepositoryImpl implements StockRepository {
         String sql = "delete from stock where id = " + id;
 
         try (Statement statement = this.connection.createStatement()) {
-            statement.executeQuery(sql);
+            statement.executeUpdate(sql);
             logger.info(id + " numaralı kayıt başarıyla silindi.");
         } catch (SQLException e) {
             logger.error("Kayıt atılırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

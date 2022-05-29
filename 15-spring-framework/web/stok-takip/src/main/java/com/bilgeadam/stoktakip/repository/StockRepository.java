@@ -4,6 +4,7 @@ import com.bilgeadam.stoktakip.model.entity.Stock;
 import com.bilgeadam.stoktakip.repository.base.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+import java.sql.Connection;
+
 public interface StockRepository extends CrudRepository<Stock,Long> {
 }
