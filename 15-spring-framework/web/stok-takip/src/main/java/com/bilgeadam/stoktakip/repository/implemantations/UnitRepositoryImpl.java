@@ -15,7 +15,21 @@ public class UnitRepositoryImpl implements UnitRepository {
 
     @Override
     public List<Unit> findAll() {
-        return null;
+        String sql = "select * from unit;";
+        List<Unit> units = new ArrayList<>();
+        try (Statement statement = this.connection.createStatement()) {
+            statement.executeQuery(sql);
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                units.add(new Unit(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.error("Kayit alirken bir hata olustu" +
+                    "SQL State: " + e.getSQLState() +
+                    "Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return units;
     }
 
     @Override
