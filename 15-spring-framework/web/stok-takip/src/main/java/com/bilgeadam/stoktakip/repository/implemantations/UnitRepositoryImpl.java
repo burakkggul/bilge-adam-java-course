@@ -2,14 +2,43 @@ package com.bilgeadam.stoktakip.repository.implemantations;
 
 import com.bilgeadam.stoktakip.model.entity.Unit;
 import com.bilgeadam.stoktakip.repository.UnitRepository;
-import com.bilgeadam.stoktakip.repository.base.CrudRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UnitRepositoryImpl implements UnitRepository {
+
+    private final Logger logger = LoggerFactory.getLogger(UnitRepositoryImpl.class);
+
+    private final Connection connection;
+
+    public UnitRepositoryImpl(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void save(Unit unit) {
+        String sql = "insert into unit(name) values (?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, unit.getName());
+            statement.executeUpdate();
+            logger.info(unit.getName() + "isimli unit eklendi");
+        } catch (SQLException e) {
+            logger.error("Kayıt oluşturulurken hata aldı SQL State: " + e.getSQLState() + "Reason :" + e.getMessage());
+        }
 
     }
 
