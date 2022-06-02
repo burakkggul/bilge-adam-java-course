@@ -54,4 +54,20 @@ public class StockController {
     public ResponseEntity<StockResponse> update(@RequestBody StockRequest stockRequest){
         return ResponseEntity.ok(this.stockService.update(stockRequest));
     }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<String> getStatistics(){
+        return ResponseEntity.ok(this.stockService.getStatistics());
+    }
+
+    @GetMapping("/alternative/statistics")
+    public ResponseEntity<String> getStatisticsFromDataSource(){
+        return ResponseEntity.ok(this.stockService.getStatisticsFromDataSource());
+    }
+
+    @PutMapping("/sell")
+    public ResponseEntity<Void> sell(@RequestParam Long barcode, @RequestParam Long stockCode){
+        this.stockService.sell(barcode, stockCode);
+        return ResponseEntity.ok().build();
+    }
 }

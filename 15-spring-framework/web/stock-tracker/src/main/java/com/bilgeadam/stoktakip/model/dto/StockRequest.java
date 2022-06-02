@@ -16,5 +16,5 @@ public class StockRequest {
     private Integer quantity;
     private Double boughtPrice;
     private Double sellPrice;
-    private Long unitId;
+    private UnitRequest unit;
 }

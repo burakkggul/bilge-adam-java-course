@@ -16,7 +16,7 @@ public class StockResponse {
     private Double sellPrice;
     private Long stockCode;
     private Long barcode;
-    private Long unitId;
+    private UnitResponse unit;
 
     public StockResponse(Stock stock){
         this.id = stock.getId();
@@ -26,6 +26,6 @@ public class StockResponse {
         this.sellPrice = stock.getSellPrice();
         this.stockCode = stock.getStockCode();
         this.barcode = stock.getBarcode();
-        this.unitId = stock.getUnitId();
+        this.unit = new UnitResponse(stock.getUnit());
     }
 }

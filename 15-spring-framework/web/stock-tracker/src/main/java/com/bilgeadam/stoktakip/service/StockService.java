@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,8 +37,25 @@ public class StockService {
                 .collect(Collectors.toList());
     }
 
-    public int getStatistics(){
-        return 0;
+    public String getStatistics(){
+        List<Stock> stocks = this.stockRepository.findAllSellAndBoughtPriceAndQuantity();
+        AtomicReference<Double> profit = new AtomicReference<>();
+        profit.set(0d);
+        stocks.forEach(stock -> {
+            profit.set(profit.get()+(stock.getSellPrice()-stock.getBoughtPrice()) * stock.getQuantity());
+        });
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        return df.format(profit.get());
+    }
+
+    public String getStatisticsFromDataSource(){
+        Double profit = this.stockRepository.findProfitFromAllStocks();
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        return df.format(profit);
     }
 
     public void delete(Long id) {
@@ -65,5 +82,13 @@ public class StockService {
                         "Stok kaydı bulunamadı. Id alanını kontrol edin."));
         Stock stock = new Stock(stockRequest, savedStock.getStockCode(), savedStock.getBarcode(), savedStock.getId());
         return new StockResponse(this.stockRepository.update(stock));
+    }
+
+    public void sell(Long barcode, Long stockCode) {
+        if(this.stockRepository.isStockExists(barcode,stockCode)){
+            // TODO stok var olduğu zaman ilgili kaydın quantity değerini 1 azaltarak kaydet.
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Stok bulunamadı.");
+        }
     }
 }

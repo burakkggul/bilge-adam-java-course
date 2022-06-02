@@ -40,7 +40,6 @@ public class UnitRepositoryImpl implements UnitRepository {
         } catch (SQLException e) {
             logger.error("Kayıt oluşturulurken hata aldı SQL State: " + e.getSQLState() + "Reason :" + e.getMessage());
         }
-
     }
 
     @Override
@@ -64,16 +63,53 @@ public class UnitRepositoryImpl implements UnitRepository {
 
     @Override
     public Optional<Unit> findById(Long id) {
+        String sql = "select * from unit where id = " + id;
+        try (Statement statement = this.connection.createStatement()) {
+            statement.executeQuery(sql);
+            ResultSet resultSet = statement.getResultSet();
+
+            while (resultSet.next()) {
+                return Optional.of(new Unit(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.error("Kayit alirken bir hata olustu" +
+                    "SQL State: " + e.getSQLState() +
+                    "Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return Optional.empty();
     }
 
     @Override
     public Unit update(Unit unit) {
-        return null;
+        String sql = "update unit set name=? where id=?";
+
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            statement.setString(1, unit.getName());
+            statement.setLong(2, unit.getId());
+            statement.executeUpdate();
+            logger.info(unit.getId() + " id'li unit başarıyla güncelledi.");
+        } catch (SQLException e) {
+            logger.error("Kayıt atılırken bir hata oluştu." +
+                    " SQL State: " + e.getSQLState() +
+                    " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return this.findById(unit.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Beklenmedik bir hata oluştu."));
     }
 
     @Override
     public void delete(Long id) {
+        String sql = "delete from unit where id = " + id;
 
+        try (Statement statement = this.connection.createStatement()) {
+            statement.executeUpdate(sql);
+            logger.info(id + " numaralı kayıt başarıyla silindi.");
+        } catch (SQLException e) {
+            logger.error("Kayıt atılırken bir hata oluştu." +
+                    " SQL State: " + e.getSQLState() +
+                    " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
