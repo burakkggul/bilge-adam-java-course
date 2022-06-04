@@ -1,4 +1,4 @@
-package com.bilgeadam.stoktakip.model.dto;
+package com.bilgeadam.stock.tracker.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnitRequest {
+public class StockRequest {
+
     private Long id;
     private String name;
-
+    private Integer quantity;
+    private Double boughtPrice;
+    private Double sellPrice;
+    private UnitRequest unit;
 }

@@ -1,4 +1,4 @@
-package com.bilgeadam.stoktakip;
+package com.bilgeadam.stock.tracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

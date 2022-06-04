@@ -1,11 +1,8 @@
-package com.bilgeadam.stoktakip.repository;
+package com.bilgeadam.stock.tracker.repository;
 
-import com.bilgeadam.stoktakip.model.entity.Stock;
-import com.bilgeadam.stoktakip.model.entity.Unit;
-import com.bilgeadam.stoktakip.repository.base.CrudRepository;
-import org.springframework.stereotype.Repository;
+import com.bilgeadam.stock.tracker.model.entity.Stock;
+import com.bilgeadam.stock.tracker.repository.base.CrudRepository;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 

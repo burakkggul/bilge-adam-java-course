@@ -1,8 +1,8 @@
-package com.bilgeadam.stoktakip.controller;
+package com.bilgeadam.stock.tracker.controller;
 
-import com.bilgeadam.stoktakip.model.dto.UnitRequest;
-import com.bilgeadam.stoktakip.model.dto.UnitResponse;
-import com.bilgeadam.stoktakip.service.UnitService;
+import com.bilgeadam.stock.tracker.model.dto.UnitResponse;
+import com.bilgeadam.stock.tracker.service.UnitService;
+import com.bilgeadam.stock.tracker.model.dto.UnitRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

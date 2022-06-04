@@ -1,12 +1,8 @@
-package com.bilgeadam.stoktakip.model.entity;
+package com.bilgeadam.stock.tracker.model.entity;
 
-import com.bilgeadam.stoktakip.model.dto.StockRequest;
-import lombok.AllArgsConstructor;
+import com.bilgeadam.stock.tracker.model.dto.StockRequest;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

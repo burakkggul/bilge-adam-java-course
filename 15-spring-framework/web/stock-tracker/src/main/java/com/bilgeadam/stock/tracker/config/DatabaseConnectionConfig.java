@@ -1,4 +1,4 @@
-package com.bilgeadam.stoktakip.config;
+package com.bilgeadam.stock.tracker.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

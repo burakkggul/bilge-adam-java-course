@@ -1,4 +1,4 @@
-package com.bilgeadam.stoktakip.repository.base;
+package com.bilgeadam.stock.tracker.repository.base;
 
 import org.springframework.stereotype.Repository;
 

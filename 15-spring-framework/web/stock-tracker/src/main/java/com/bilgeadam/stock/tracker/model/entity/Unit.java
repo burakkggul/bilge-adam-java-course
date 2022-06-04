@@ -1,6 +1,6 @@
-package com.bilgeadam.stoktakip.model.entity;
+package com.bilgeadam.stock.tracker.model.entity;
 
-import com.bilgeadam.stoktakip.model.dto.UnitRequest;
+import com.bilgeadam.stock.tracker.model.dto.UnitRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,9 @@
-package com.bilgeadam.stoktakip.service;
+package com.bilgeadam.stock.tracker.service;
 
-import com.bilgeadam.stoktakip.model.dto.StockRequest;
-import com.bilgeadam.stoktakip.model.dto.StockResponse;
-import com.bilgeadam.stoktakip.model.entity.Stock;
-import com.bilgeadam.stoktakip.repository.StockRepository;
+import com.bilgeadam.stock.tracker.model.dto.StockRequest;
+import com.bilgeadam.stock.tracker.model.dto.StockResponse;
+import com.bilgeadam.stock.tracker.model.entity.Stock;
+import com.bilgeadam.stock.tracker.repository.StockRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

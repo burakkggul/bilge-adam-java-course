@@ -1,8 +1,7 @@
-package com.bilgeadam.stoktakip.repository.implemantations;
+package com.bilgeadam.stock.tracker.repository.implemantations;
 
-import com.bilgeadam.stoktakip.model.entity.Stock;
-import com.bilgeadam.stoktakip.model.entity.Unit;
-import com.bilgeadam.stoktakip.repository.StockRepository;
+import com.bilgeadam.stock.tracker.model.entity.Stock;
+import com.bilgeadam.stock.tracker.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

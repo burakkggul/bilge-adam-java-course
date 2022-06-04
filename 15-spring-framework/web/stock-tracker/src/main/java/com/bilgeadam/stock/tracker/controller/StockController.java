@@ -1,8 +1,8 @@
-package com.bilgeadam.stoktakip.controller;
+package com.bilgeadam.stock.tracker.controller;
 
-import com.bilgeadam.stoktakip.model.dto.StockRequest;
-import com.bilgeadam.stoktakip.model.dto.StockResponse;
-import com.bilgeadam.stoktakip.service.StockService;
+import com.bilgeadam.stock.tracker.model.dto.StockRequest;
+import com.bilgeadam.stock.tracker.model.dto.StockResponse;
+import com.bilgeadam.stock.tracker.service.StockService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
