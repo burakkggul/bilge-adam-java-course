@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a3f78501-4e3d-4380-82f4-f905a476bb23",
+		"_postman_id": "78e9309e-c77e-4fca-a1bc-ded2f2d03153",
 		"name": "Stock Tracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -79,7 +79,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/stock?id=2",
+							"raw": "http://localhost:8080/stock?id=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -91,7 +91,36 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/stock?barcode=x&stockCode=y",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stock?barcode=8392571745&stockCode=5062861075",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "barcode",
+									"value": "8392571745"
+								},
+								{
+									"key": "stockCode",
+									"value": "5062861075"
 								}
 							]
 						}
@@ -221,7 +250,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/stock/sell?barcode=6266827164&stockCode=1175928207",
+							"raw": "http://localhost:8080/stock/sell?barcode=8392571745&stockCode=5062861075",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -234,11 +263,11 @@
 							"query": [
 								{
 									"key": "barcode",
-									"value": "6266827164"
+									"value": "8392571745"
 								},
 								{
 									"key": "stockCode",
-									"value": "1175928207"
+									"value": "5062861075"
 								}
 							]
 						}
