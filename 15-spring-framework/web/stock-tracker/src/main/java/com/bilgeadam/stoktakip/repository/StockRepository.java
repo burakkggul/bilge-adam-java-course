@@ -7,10 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Optional;
 
 public interface StockRepository extends CrudRepository<Stock,Long> {
     List<Stock> findAllSellAndBoughtPriceAndQuantity();
     Double findProfitFromAllStocks();
 
     Boolean isStockExists(Long barcode, Long stockCode);
+
+    Optional<Stock> findByBarcodeAndStockCode(Long barcode, Long stockCode);
 }

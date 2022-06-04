@@ -50,6 +50,12 @@ public class StockController {
         return ResponseEntity.ok(this.stockService.findById(id));
     }
 
+    @GetMapping(params = {"barcode","stockCode"})
+    public ResponseEntity<StockResponse> findByBarcodeAndStockCode(@RequestParam Long barcode,
+                                                                   @RequestParam Long stockCode){
+        return ResponseEntity.ok(this.stockService.findByBarcodeAndStockCode(barcode, stockCode));
+    }
+
     @PutMapping
     public ResponseEntity<StockResponse> update(@RequestBody StockRequest stockRequest){
         return ResponseEntity.ok(this.stockService.update(stockRequest));

@@ -28,6 +28,19 @@ public class StockRepositoryImpl implements StockRepository {
         this.connection = connection;
     }
 
+    private final String COLUMN_DEFINITION_SQL = " s.id as id, " +
+            "s.name as name, " +
+            "s.quantity as quantity, " +
+            "s.bought_price as bought_price, " +
+            "s.sell_price as sell_price, " +
+            "s.stock_code as stock_code, " +
+            "s.barcode as barcode, " +
+            "u.id as unit_id, " +
+            "u.name as unit_name ";
+
+    private final String STOCK_BASE_SELECT_SQL = "select" + COLUMN_DEFINITION_SQL + "from stock s" +
+            " inner join unit u on s.unit_id = u.id";
+
     @Override
     public void save(Stock stock) {
         String sql = "insert into stock(" +
@@ -59,16 +72,7 @@ public class StockRepositoryImpl implements StockRepository {
 
     @Override
     public List<Stock> findAll() {
-        String sql = "select s.id as id,\n" +
-                "s.name as name, " +
-                "s.quantity as quantity, " +
-                "s.bought_price as bought_price, " +
-                "s.sell_price as sell_price, " +
-                "s.stock_code as stock_code, " +
-                "s.barcode as barcode, " +
-                "u.id as unit_id, " +
-                "u.name as unit_name " +
-                "from stock s inner join unit u on s.unit_id = u.id";
+        String sql = STOCK_BASE_SELECT_SQL;
         List<Stock> stocks = new ArrayList<>();
         try (Statement statement = this.connection.createStatement()) {
             statement.executeQuery(sql);
@@ -88,16 +92,7 @@ public class StockRepositoryImpl implements StockRepository {
 
     @Override
     public Optional<Stock> findById(Long id) {
-        String sql = "select s.id as id,\n" +
-                "s.name as name, " +
-                "s.quantity as quantity, " +
-                "s.bought_price as bought_price, " +
-                "s.sell_price as sell_price, " +
-                "s.stock_code as stock_code, " +
-                "s.barcode as barcode, " +
-                "u.id as unit_id, " +
-                "u.name as unit_name " +
-                "from stock s inner join unit u on s.unit_id = u.id where s.id = " + id;
+        String sql = STOCK_BASE_SELECT_SQL + " where s.id = " + id;
 
         try (Statement statement = this.connection.createStatement()) {
             statement.executeQuery(sql);
@@ -146,7 +141,7 @@ public class StockRepositoryImpl implements StockRepository {
                     " Reason: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return this.findById(stock.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Beklenmedik bir hata oluştu."));
+        return this.findById(stock.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Beklenmedik bir hata oluştu."));
     }
 
     @Override
@@ -169,13 +164,13 @@ public class StockRepositoryImpl implements StockRepository {
     public List<Stock> findAllSellAndBoughtPriceAndQuantity() {
         String sql = "select s.sell_price, s.bought_price, s.quantity from stock s";
         List<Stock> stocks = new ArrayList<>();
-        try (Statement statement = this.connection.createStatement()){
+        try (Statement statement = this.connection.createStatement()) {
             statement.executeQuery(sql);
             ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()){
-                stocks.add(new Stock(resultSet.getDouble("bought_price"),resultSet.getDouble("sell_price"),resultSet.getInt(3)));
+            while (resultSet.next()) {
+                stocks.add(new Stock(resultSet.getDouble("bought_price"), resultSet.getDouble("sell_price"), resultSet.getInt(3)));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             logger.error("İstatistik hesaplanırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
@@ -205,20 +200,40 @@ public class StockRepositoryImpl implements StockRepository {
     @Override
     public Boolean isStockExists(Long barcode, Long stockCode) {
         String sql = "select exists(select * from stock where barcode=? and stock_code=?)";
-        try (PreparedStatement preparedStatement = this.connection.prepareStatement(sql)){
-            preparedStatement.setLong(1,barcode);
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement(sql)) {
+            preparedStatement.setLong(1, barcode);
             preparedStatement.setLong(2, stockCode);
             preparedStatement.executeQuery();
             ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 return resultSet.getBoolean(1);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             logger.error("Kaydın varlığı sorgulanırken bir hata oluştu." +
                     " SQL State: " + e.getSQLState() +
                     " Reason: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return false;
+    }
+
+    @Override
+    public Optional<Stock> findByBarcodeAndStockCode(Long barcode, Long stockCode) {
+        String sql = STOCK_BASE_SELECT_SQL + " where s.barcode=? and s.stock_code=?";
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement(sql)) {
+            preparedStatement.setLong(1, barcode);
+            preparedStatement.setLong(2, stockCode);
+            preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.getResultSet();
+            while (resultSet.next()) {
+                return Optional.of(new Stock(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.error("Kaydın varlığı sorgulanırken bir hata oluştu." +
+                    " SQL State: " + e.getSQLState() +
+                    " Reason: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return Optional.empty();
     }
 }
