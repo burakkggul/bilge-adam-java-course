@@ -29,6 +29,23 @@ public class ResumeService {
             ResumeDTO resumeDTO = new ResumeDTO(resumes.get(i));
             resumeDTOS.add(resumeDTO);
         }
+        */
+
+        /*
+        for(Resume resume : resumes){
+            ResumeDTO resumeDTO = new ResumeDTO(resume);
+            resumeDTOS.add(resumeDTO);
+        }
+        */
+
+        resumes.forEach((resume) -> {
+            ResumeDTO resumeDTO = new ResumeDTO(resume);
+            resumeDTOS.add(resumeDTO);
+        });
+
+        return resumeDTOS;
+
+        //return resumes.stream().map(ResumeDTO::new).collect(Collectors.toList());
     }
 
     @Transactional
