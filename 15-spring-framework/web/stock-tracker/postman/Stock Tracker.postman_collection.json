@@ -273,6 +273,65 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/stock?quantity=x",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/stock?barcode=x",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stock?barcode=9247383775",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "barcode",
+									"value": "9247383775"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/stock/projection?barcode=x",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stock/projection?barcode=9247383775",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stock",
+								"projection"
+							],
+							"query": [
+								{
+									"key": "barcode",
+									"value": "9247383775"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
