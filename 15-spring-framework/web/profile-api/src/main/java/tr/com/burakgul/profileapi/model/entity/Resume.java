@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author Burcu Salman
  */
 @Entity
-@Table(name = "Resume")
+@Table(name = "resume")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,7 +28,7 @@ public class Resume {
     @Column(name = "company")
     private String company;
 
-    @Column(name = "totalExperience")
+    @Column(name = "total_experience")
     private int totalExperience;
 
     @Column(name = "type")
@@ -36,6 +36,7 @@ public class Resume {
 
     public Resume(ResumeDTO resumeDTO){
         this.company = resumeDTO.getCompany();
-        this.totalExperience = resumeDTO.getTotalExperinece();
+        this.totalExperience = resumeDTO.getTotalExperience();
+        this.type = resumeDTO.getType();
     }
 }

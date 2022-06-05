@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tr.com.burakgul.profileapi.model.dto.ProjectDTO;
+import tr.com.burakgul.profileapi.model.dto.ProjectDescriptionDTO;
 import tr.com.burakgul.profileapi.service.ProjectService;
 import java.util.List;
-
-import javax.xml.ws.Response;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,8 +21,8 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping(params = "id")
-    public ResponseEntity<ProjectDTO> findProject(@RequestParam Long id){
-        return ResponseEntity.ok(this.projectService.findProject(id));
+    public ResponseEntity<ProjectDTO> findProjectById(@RequestParam Long id){ // findProjectById
+        return ResponseEntity.ok(this.projectService.findProjectById(id));
     }
 
     @GetMapping
@@ -37,7 +36,7 @@ public class ProjectController {
     }
 
     @PutMapping(params = "id")
-    public ResponseEntity<ProjectDTO> updateProjectDescription(@RequestBody ProjectDTO project, @RequestParam Long id){
+    public ResponseEntity<ProjectDTO> updateProjectDescription(@RequestBody ProjectDescriptionDTO project, @RequestParam Long id){
         return ResponseEntity.ok(this.projectService.updateProjectDescription(project, id));
     }
 

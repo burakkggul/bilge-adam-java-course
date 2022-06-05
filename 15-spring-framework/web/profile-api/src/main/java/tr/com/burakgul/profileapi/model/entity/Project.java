@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tr.com.burakgul.profileapi.model.dto.ProjectDTO;
+import tr.com.burakgul.profileapi.model.dto.ProjectDescriptionDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  * @author Meriç Akgül
  */
 @Entity
-@Table(name = "projects")
+@Table(name = "project")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "projectName")
+    @Column(name = "project_name")
     private String projectName;
 
     @Column(name = "description")
@@ -37,6 +38,10 @@ public class Project {
     public Project(ProjectDTO projectDTO){
         this.projectUrl = projectDTO.getProjectUrl();
         this.projectName = projectDTO.getProjectName();
+        this.description = projectDTO.getDescription();
+    }
+
+    public Project(ProjectDescriptionDTO projectDTO){
         this.description = projectDTO.getDescription();
     }
 

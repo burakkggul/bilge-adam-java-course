@@ -10,12 +10,12 @@ import tr.com.burakgul.profileapi.model.entity.Resume;
 @NoArgsConstructor
 public class ResumeDTO {
     private String company;
-    private int totalExperinece;
+    private int totalExperience;
     private String type;
 
     public ResumeDTO(Resume resume){
         this.company = resume.getCompany();
-        this.totalExperinece = resume.getTotalExperience();
+        this.totalExperience = resume.getTotalExperience();
         this.type = resume.getType();
     }
 }
