@@ -41,7 +41,7 @@ public class ProjectService {
     public List<ProjectDTO> findAll(){
         List<Project> projects = this.projectRepository.findAll();
         List<ProjectDTO> projectDTOS = projects.stream()
-                .map(project -> new ProjectDTO(project))
+                .map(ProjectDTO::new)
                 .collect(Collectors.toList());
 
         return projectDTOS;
