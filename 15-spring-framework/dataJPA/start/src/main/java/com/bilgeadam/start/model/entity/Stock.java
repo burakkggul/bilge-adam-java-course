@@ -5,11 +5,13 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "stock")
 @Data
+@NamedQuery(name = "Stock.say", query ="SELECT count(s.id) FROM Stock s")
 public class Stock extends BaseEntity {
 
     private String name;

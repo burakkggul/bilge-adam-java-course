@@ -1,5 +1,6 @@
 package com.bilgeadam.start.model.entity.base;
 
+import com.bilgeadam.start.repository.projections.StockProjection;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;

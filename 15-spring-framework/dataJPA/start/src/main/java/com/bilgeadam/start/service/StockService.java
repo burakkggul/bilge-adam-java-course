@@ -2,13 +2,13 @@ package com.bilgeadam.start.service;
 
 import com.bilgeadam.start.model.entity.Stock;
 import com.bilgeadam.start.repository.StockRepository;
+import com.bilgeadam.start.repository.projections.StockProjection;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +35,21 @@ public class StockService {
     @Transactional
     public void deleteByBarcode(Long barcode){
         this.stockRepository.deleteByBarcode(barcode);
+    }
+
+    public List<Stock> findByBarcodeWithProjection(Long barcode){
+        List<StockProjection> stocks = this.stockRepository.findByBarcode(barcode);
+
+        Integer count = this.stockRepository.say();
+
+        List<Stock> stockList = this.stockRepository.a(3005119297L);
+        List<Stock> stockList2 = this.stockRepository.b(3005119297L);
+
+        return stocks.stream().map(stockProjection -> {
+            Stock stock = new Stock();
+            stock.setBarcode(stockProjection.getBarcode());
+            stock.setName(stockProjection.getName());
+            return stock;
+        }).collect(Collectors.toList());
     }
 }

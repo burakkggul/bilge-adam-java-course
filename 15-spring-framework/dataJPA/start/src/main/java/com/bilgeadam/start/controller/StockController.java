@@ -46,4 +46,9 @@ public class StockController {
         this.stockService.deleteByBarcode(barcode);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "/projection", params = "barcode")
+    public ResponseEntity<List<Stock>> findByBarcodeWithProjection(@RequestParam Long barcode){
+        return ResponseEntity.ok(this.stockService.findByBarcodeWithProjection(barcode));
+    }
 }
