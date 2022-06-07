@@ -36,8 +36,9 @@ public class ProjectController {
     }
 
     @PutMapping(params = "id")
-    public ResponseEntity<ProjectDTO> updateProjectDescription(@RequestBody ProjectDescriptionDTO project, @RequestParam Long id){
-        return ResponseEntity.ok(this.projectService.updateProjectDescription(project, id));
+    public ResponseEntity<Void> updateProjectDescription(@RequestBody ProjectDescriptionDTO project, @RequestParam Long id){
+        this.projectService.updateProjectDescription(project, id);
+        return ResponseEntity.ok().build();
     }
 
 }

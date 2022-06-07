@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -31,8 +33,9 @@ public class Stock extends BaseEntity {
     @Column(name = "barcode")
     private Long barcode;
 
-    @Column(name = "unit_id")
-    private Long unitId;
+    @ManyToOne
+    @JoinColumn(name="unit_id")
+    private Unit unit;
 
     @Column(name = "isAlive")
     private Boolean isAlive;
