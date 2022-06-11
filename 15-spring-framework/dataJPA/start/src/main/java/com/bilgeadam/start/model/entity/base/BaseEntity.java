@@ -1,6 +1,5 @@
 package com.bilgeadam.start.model.entity.base;
 
-import com.bilgeadam.start.repository.projections.StockProjection;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Data
 public class BaseEntity {
+    //@JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

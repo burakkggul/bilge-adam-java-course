@@ -2,6 +2,8 @@ package com.bilgeadam.start.model.entity;
 
 import com.bilgeadam.start.model.entity.base.BaseEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +14,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "stock")
-@Data
+@Getter
+@Setter
 @NamedQuery(name = "Stock.say", query ="SELECT count(s.id) FROM Stock s")
 public class Stock extends BaseEntity {
 

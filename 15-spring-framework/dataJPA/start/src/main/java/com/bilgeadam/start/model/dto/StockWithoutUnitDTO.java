@@ -1,0 +1,27 @@
+package com.bilgeadam.start.model.dto;
+
+import com.bilgeadam.start.model.entity.Stock;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class StockWithoutUnitDTO {
+    private String name;
+    private Integer quantity;
+    private Double boughtPrice;
+    private Double sellPrice;
+    private Long stockCode;
+    private Long barcode;
+    private Boolean isAlive;
+
+    public StockWithoutUnitDTO(Stock stock){
+        this.name = stock.getName();
+        this.quantity = stock.getQuantity();
+        this.boughtPrice = stock.getBoughtPrice();
+        this.sellPrice = stock.getSellPrice();
+        this.stockCode = stock.getStockCode();
+        this.barcode = stock.getBarcode();
+        this.isAlive = stock.getIsAlive();
+    }
+}

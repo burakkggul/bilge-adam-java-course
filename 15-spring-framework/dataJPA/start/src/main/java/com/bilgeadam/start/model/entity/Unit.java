@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="unit")
@@ -13,4 +16,10 @@ import javax.persistence.Table;
 @Setter
 public class Unit extends BaseEntity {
     private String name;
+
+    /*@OneToMany
+    @JoinColumn(name = "unit_id")*/
+    //@JsonIgnore
+    @OneToMany(mappedBy = "unit")
+    private List<Stock> stocks = new ArrayList<>();
 }
