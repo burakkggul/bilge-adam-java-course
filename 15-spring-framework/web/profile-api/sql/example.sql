@@ -20,8 +20,16 @@ create table ogrenci
     tc_kimlik int primary key,
     ad        varchar(255),
     soyad     varchar(255),
-    sinif_no  int
+    sinif_no  int references sinif
 );
+
+create table sinif
+(
+    sinif_no int primary key,
+    sinif        varchar(255),
+    sube     varchar(255)
+);
+
 
 drop index ogrenci_tc_kimlik_index;
 
