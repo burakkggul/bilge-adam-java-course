@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,13 +26,38 @@ public class UnitService {
      * @param unitStockDTO
      * @return
      */
-    public Unit save(UnitStockDTO unitStockDTO){
-        return this.unitRepository.save(unit);
+    public UnitStockDTO save(UnitStockDTO unitStockDTO) {
+        Unit unit = this.unitRepository.save(new Unit(unitStockDTO));
+
+        List<Stock> stockList = new ArrayList<>();
+        for (StockWithoutUnitDTO stockWithoutUnitDTO : unitStockDTO.getStocks()) {
+            Stock stock;
+            if (stockWithoutUnitDTO.getId() != null) {
+                Optional<Stock> stockOptional = this.stockRepository.findById(stockWithoutUnitDTO.getId());
+                if (stockOptional.isPresent()) {
+                    stock = stockOptional.get();
+                } else {
+                    stock = new Stock(stockWithoutUnitDTO);
+
+                }
+            } else {
+                stock = new Stock(stockWithoutUnitDTO);
+
+            }
+            stock.setUnit(unit);
+            Stock savedStock = this.stockRepository.save(stock);
+            stockList.add(savedStock);
+        }
+        unit.setStocks(stockList);
+
+        // Kullanıcıya en güncel unit'i göstermek için
+        UnitStockDTO unitStockResponse = this.stockMapToStockUnitDTO(unit);
+        return unitStockResponse;
     }
 
-    public Unit save2(UnitStockDTO unitStockDTO){
+/*    public Unit save2(UnitStockDTO unitStockDTO){
         return this.unitRepository.save(unit);
-    }
+    }*/
 
     public List<UnitStockDTO> findAll() {
         List<Unit> units = this.unitRepository.findAll();

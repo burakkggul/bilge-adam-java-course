@@ -2,10 +2,12 @@ package com.bilgeadam.start.model.dto;
 
 import com.bilgeadam.start.model.entity.Stock;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class StockWithoutUnitDTO {
     private String name;
     private Integer quantity;

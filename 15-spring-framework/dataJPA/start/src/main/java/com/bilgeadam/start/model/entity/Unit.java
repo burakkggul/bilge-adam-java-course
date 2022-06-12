@@ -1,6 +1,7 @@
 package com.bilgeadam.start.model.entity;
 
 import com.bilgeadam.start.model.dto.UnitDTO;
+import com.bilgeadam.start.model.dto.UnitStockDTO;
 import com.bilgeadam.start.model.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,10 @@ public class Unit extends BaseEntity {
 
     public Unit(UnitDTO unitDTO){
         super(unitDTO.getId());
+        this.name = unitDTO.getName();
+    }
+
+    public Unit(UnitStockDTO unitDTO){
         this.name = unitDTO.getName();
     }
 }
