@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+// TODO Unit'leri savedekine benzer bir mantıkla var olan bir unit için update edecek yöntemi geliştiriniz.
+
 @Service
 @RequiredArgsConstructor
 public class UnitService {
@@ -41,11 +43,10 @@ public class UnitService {
                     stock = stockOptional.get();
                 } else {
                     stock = new Stock(stockWithoutUnitDTO);
-
+                    this.updateStockFields(stock,stockWithoutUnitDTO);
                 }
             } else {
                 stock = new Stock(stockWithoutUnitDTO);
-
             }
             stock.setUnit(unit);
             Stock savedStock = this.stockRepository.save(stock);
