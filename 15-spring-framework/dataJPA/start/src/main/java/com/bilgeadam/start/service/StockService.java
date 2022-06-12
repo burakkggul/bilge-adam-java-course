@@ -32,13 +32,16 @@ public class StockService {
         return stockDTOS;
     }
 
-    public Stock save(Stock stock){
+    public StockDTO save(StockDTO stockDTO){
+        Stock stock = new Stock(stockDTO);
         if(stock.getUnit().getId() == null
                 || !this.unitRepository.existsById(stock.getUnit().getId())){
+
             Unit unit = this.unitRepository.save(stock.getUnit());
             stock.setUnit(unit);
         }
-        return this.stockRepository.save(stock);
+        Stock savedStock = this.stockRepository.save(stock);
+        return new StockDTO(savedStock);
     }
 
     public List<Stock> findByQuantity(Integer quantity){
@@ -78,5 +81,11 @@ public class StockService {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Hatalı stok id.");
         }
+
+        /*Stock stock  = this.stockRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                "Hatalı stok id."));*/
+
     }
 }

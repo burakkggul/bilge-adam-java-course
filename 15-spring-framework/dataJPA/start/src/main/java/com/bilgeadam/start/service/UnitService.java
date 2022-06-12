@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UnitService {
     private final UnitRepository unitRepository;
 
-    public Unit save(Unit unit){
+    public Unit save(UnitStockDTO unitStockDTO){
         return this.unitRepository.save(unit);
     }
 
@@ -31,18 +31,18 @@ public class UnitService {
 
     public UnitStockDTO stockMapToStockUnitDTO(Unit unit){
         UnitStockDTO unitStockDTO = new UnitStockDTO(unit);
-        List<StockWithoutUnitDTO> stockWithoutUnitDTOS = unit.getStocks().stream().
-                map(StockWithoutUnitDTO::new)
+        List<StockWithoutUnitDTO> stockWithoutUnitDTOS = unit.getStocks().stream()
+                .map(StockWithoutUnitDTO::new)
                 .collect(Collectors.toList());
         unitStockDTO.setStocks(stockWithoutUnitDTOS);
         return unitStockDTO;
     }
 
     public UnitStockDTO findById(Long id) {
-        Optional<Unit> unit = this.unitRepository.findById(id);
-        if(unit.isPresent()){
-            Unit unit1 = unit.get();
-            return this.stockMapToStockUnitDTO(unit1);
+        Optional<Unit> unitOptional = this.unitRepository.findById(id);
+        if(unitOptional.isPresent()){
+            Unit unit = unitOptional.get();
+            return this.stockMapToStockUnitDTO(unit);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"id ile unit bulunamadı.");
         }

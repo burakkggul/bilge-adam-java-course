@@ -34,7 +34,7 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Stock> save(@RequestBody Stock stock){
+    public ResponseEntity<StockDTO> save(@RequestBody StockDTO stock){
         return ResponseEntity.ok(this.stockService.save(stock));
     }
 

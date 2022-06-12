@@ -1,7 +1,9 @@
 package com.bilgeadam.start.model.entity;
 
+import com.bilgeadam.start.model.dto.UnitDTO;
 import com.bilgeadam.start.model.entity.base.BaseEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import java.util.List;
 @Table(name="unit")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Unit extends BaseEntity {
     private String name;
 
@@ -22,4 +25,9 @@ public class Unit extends BaseEntity {
     //@JsonIgnore
     @OneToMany(mappedBy = "unit")
     private List<Stock> stocks = new ArrayList<>();
+
+    public Unit(UnitDTO unitDTO){
+        super(unitDTO.getId());
+        this.name = unitDTO.getName();
+    }
 }

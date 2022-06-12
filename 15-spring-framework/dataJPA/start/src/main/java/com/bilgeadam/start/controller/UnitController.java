@@ -1,5 +1,6 @@
 package com.bilgeadam.start.controller;
 
+import com.bilgeadam.start.model.dto.UnitDTO;
 import com.bilgeadam.start.model.dto.UnitStockDTO;
 import com.bilgeadam.start.model.entity.Unit;
 import com.bilgeadam.start.service.UnitService;
@@ -21,8 +22,8 @@ public class UnitController {
     private final UnitService unitService;
 
     @PostMapping
-    public Unit save(@RequestBody Unit unit){
-        return this.unitService.save(unit);
+    public UnitStockDTO save(@RequestBody UnitStockDTO unitStockDTO){
+        return this.unitService.save(unitStockDTO);
     }
 
     @GetMapping
