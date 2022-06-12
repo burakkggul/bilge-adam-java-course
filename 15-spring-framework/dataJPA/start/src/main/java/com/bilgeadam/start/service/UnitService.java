@@ -18,7 +18,18 @@ import java.util.stream.Collectors;
 public class UnitService {
     private final UnitRepository unitRepository;
 
+    /**
+     * Gelen stoklar da unit ile birlikte kaydedilebilsin.
+     * Sadece unit kaydı yapılabilsin.
+     * Halihazırda varolan stocklar unit ile ilişkilendirilebilsin.
+     * @param unitStockDTO
+     * @return
+     */
     public Unit save(UnitStockDTO unitStockDTO){
+        return this.unitRepository.save(unit);
+    }
+
+    public Unit save2(UnitStockDTO unitStockDTO){
         return this.unitRepository.save(unit);
     }
 
