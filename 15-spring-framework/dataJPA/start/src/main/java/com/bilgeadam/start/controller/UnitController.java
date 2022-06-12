@@ -26,6 +26,12 @@ public class UnitController {
         return this.unitService.save(unitStockDTO);
     }
 
+/*    //Meric
+    @PostMapping
+    public UnitStockDTO save(@RequestBody UnitStockDTO unitStockDTO){
+        return this.unitService.saveMeric(unitStockDTO);
+    }*/
+
     @GetMapping
     public List<UnitStockDTO> findAll(){
         return this.unitService.findAll();

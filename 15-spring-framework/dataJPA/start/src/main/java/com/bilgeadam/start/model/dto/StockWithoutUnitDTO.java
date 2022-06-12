@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class StockWithoutUnitDTO {
+    private Long id;
     private String name;
     private Integer quantity;
     private Double boughtPrice;
@@ -18,6 +19,7 @@ public class StockWithoutUnitDTO {
     private Boolean isAlive;
 
     public StockWithoutUnitDTO(Stock stock){
+        this.id = stock.getId();
         this.name = stock.getName();
         this.quantity = stock.getQuantity();
         this.boughtPrice = stock.getBoughtPrice();

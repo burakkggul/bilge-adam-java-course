@@ -3,7 +3,9 @@ package com.bilgeadam.start.service;
 import com.bilgeadam.start.model.dto.StockWithoutUnitDTO;
 import com.bilgeadam.start.model.dto.UnitStockDTO;
 import com.bilgeadam.start.model.entity.Unit;
+import com.bilgeadam.start.model.entity.Stock;
 import com.bilgeadam.start.repository.UnitRepository;
+import com.bilgeadam.start.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UnitService {
     private final UnitRepository unitRepository;
+    private final StockRepository stockRepository;
 
     /**
      * Gelen stoklar da unit ile birlikte kaydedilebilsin.
@@ -54,6 +57,25 @@ public class UnitService {
         UnitStockDTO unitStockResponse = this.stockMapToStockUnitDTO(unit);
         return unitStockResponse;
     }
+
+/*    //Meric
+    public Unit saveMeric(UnitStockDTO unitStockDTO){
+        Unit unit = new Unit();
+        unit.setName(unitStockDTO.getName());
+        List<StockWithoutUnitDTO> stocks = unitStockDTO.getStocks();
+        if(stocks.isEmpty()){
+            return this.unitRepository.save(unit);
+        } else {
+            stocks.stream().map(stock -> {
+                if(this.stockRepository.existsById(stock.getId())){
+                    Stock stockEntity = new Stock(stock);
+                    this.stockRepository.save(stockEntity);
+                }
+            });
+        }
+        return null;
+//        return this.unitRepository.save(unit);
+    }*/
 
 /*    public Unit save2(UnitStockDTO unitStockDTO){
         return this.unitRepository.save(unit);
