@@ -41,6 +41,7 @@ public class UnitService {
                 Optional<Stock> stockOptional = this.stockRepository.findById(stockWithoutUnitDTO.getId());
                 if (stockOptional.isPresent()) {
                     stock = stockOptional.get();
+                    this.updateStockFields(stock, stockWithoutUnitDTO);
                 } else {
                     stock = new Stock(stockWithoutUnitDTO);
                     this.updateStockFields(stock,stockWithoutUnitDTO);
@@ -57,6 +58,18 @@ public class UnitService {
         // Kullanıcıya en güncel unit'i göstermek için
         UnitStockDTO unitStockResponse = this.stockMapToStockUnitDTO(unit);
         return unitStockResponse;
+    }
+
+
+
+    public void updateStockFields(Stock stock, StockWithoutUnitDTO stockWithoutUnitDTO){
+        stock.setName(stockWithoutUnitDTO.getName());
+        stock.setQuantity(stockWithoutUnitDTO.getQuantity());
+        stock.setBoughtPrice(stockWithoutUnitDTO.getBoughtPrice());
+        stock.setSellPrice(stockWithoutUnitDTO.getSellPrice());
+        stock.setStockCode(stockWithoutUnitDTO.getStockCode());
+        stock.setBarcode(stockWithoutUnitDTO.getBarcode());
+        stock.setIsAlive(stockWithoutUnitDTO.getIsAlive());
     }
 
 /*    //Meric
