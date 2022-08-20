@@ -9,7 +9,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_calculator);
+        super.setContentView(R.layout.activity_grid_layout);
         System.out.println("Aktivite oluşturuluyor.");
     }
 
