@@ -1,7 +1,12 @@
 package com.bilgeadam.start.model.entity;
 
+import com.bilgeadam.start.model.dto.StockDTO;
+import com.bilgeadam.start.model.dto.StockWithoutUnitDTO;
 import com.bilgeadam.start.model.entity.base.BaseEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +17,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "stock")
-@Data
-@NamedQuery(name = "Stock.say", query ="SELECT count(s.id) FROM Stock s")
+@Getter
+@Setter
+@NamedQuery(name = "Stock.say", query = "SELECT count(s.id) FROM Stock s")
+@NoArgsConstructor
 public class Stock extends BaseEntity {
 
     private String name;
@@ -34,9 +41,31 @@ public class Stock extends BaseEntity {
     private Long barcode;
 
     @ManyToOne
-    @JoinColumn(name="unit_id")
+    @JoinColumn(name = "unit_id")
     private Unit unit;
 
     @Column(name = "isAlive")
     private Boolean isAlive;
+
+    public Stock(StockDTO stockDTO) {
+        this.name = stockDTO.getName();
+        this.quantity = stockDTO.getQuantity();
+        this.boughtPrice = stockDTO.getBoughtPrice();
+        this.sellPrice = stockDTO.getSellPrice();
+        this.stockCode = stockDTO.getStockCode();
+        this.barcode = stockDTO.getBarcode();
+        this.isAlive = stockDTO.getIsAlive();
+        Unit unit = new Unit(stockDTO.getUnit());
+        this.unit = unit;
+    }
+
+    public Stock(StockWithoutUnitDTO stockWithoutUnitDTO) {
+        this.name = stockWithoutUnitDTO.getName();
+        this.quantity = stockWithoutUnitDTO.getQuantity();
+        this.boughtPrice = stockWithoutUnitDTO.getBoughtPrice();
+        this.sellPrice = stockWithoutUnitDTO.getSellPrice();
+        this.stockCode = stockWithoutUnitDTO.getStockCode();
+        this.barcode = stockWithoutUnitDTO.getBarcode();
+        this.isAlive = stockWithoutUnitDTO.getIsAlive();
+    }
 }
