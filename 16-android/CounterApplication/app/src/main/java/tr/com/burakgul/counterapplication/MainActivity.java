@@ -10,6 +10,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.textView = super.findViewById(R.id.counter);
 
-        CountDownTimer countDownTimer = new CountDownTimer(10000,1000) {
+        this.countDownTimer =  new CountDownTimer(10000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 MainActivity.this.textView.setText("Kalan Süre: " + millisUntilFinished /  1000);
@@ -29,7 +30,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Sayaç sonlandı.", Toast.LENGTH_LONG).show();
             }
         };
+    }
 
-        countDownTimer.start();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.countDownTimer.start();
+
     }
 }
