@@ -24,7 +24,7 @@ public class TableOfContentsActivity extends AppCompatActivity {
 
         this.tableOfContentsService.prepareListViewAdapter();
 
-
+        this.tableOfContentsService.addListViewItemOnClickListener();
     }
 
 

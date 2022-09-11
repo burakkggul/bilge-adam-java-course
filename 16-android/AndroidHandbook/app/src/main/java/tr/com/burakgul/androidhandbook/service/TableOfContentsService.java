@@ -1,5 +1,6 @@
 package tr.com.burakgul.androidhandbook.service;
 
+import android.content.Intent;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import tr.com.burakgul.androidhandbook.R;
+import tr.com.burakgul.androidhandbook.activity.DetailsActivity;
 import tr.com.burakgul.androidhandbook.databinding.ActivityTableOfContentsBinding;
 import tr.com.burakgul.androidhandbook.model.Concept;
+import tr.com.burakgul.androidhandbook.util.ContextUtil;
 
 @Getter
 @RequiredArgsConstructor
@@ -44,6 +47,32 @@ public class TableOfContentsService {
         this.concepts.add(mockConcept3);
         this.concepts.add(mockConcept4);
         this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
+        this.concepts.add(mockConcept5);
     }
 
     public void prepareListViewAdapter(){
@@ -53,5 +82,15 @@ public class TableOfContentsService {
                         this.concepts);
         System.out.println(this.concepts.get(0).toString());
         activityTableOfContentsBinding.androidHandbookList.setAdapter(arrayAdapter);
+    }
+
+    public void addListViewItemOnClickListener(){
+        this.activityTableOfContentsBinding
+                .androidHandbookList.setOnItemClickListener((parent, view, position, id) -> {
+                    Intent intent = new Intent(ContextUtil
+                            .getContextFromBinding(this.activityTableOfContentsBinding), DetailsActivity.class);
+                    intent.putExtra("concept", this.concepts.get(position));
+                    ContextUtil.startActivityFromBinding(activityTableOfContentsBinding,intent);
+        });
     }
 }
