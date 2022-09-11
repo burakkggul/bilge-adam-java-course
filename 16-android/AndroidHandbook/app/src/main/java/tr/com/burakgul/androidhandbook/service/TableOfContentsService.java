@@ -1,6 +1,7 @@
 package tr.com.burakgul.androidhandbook.service;
 
 import android.content.Intent;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -85,12 +86,15 @@ public class TableOfContentsService {
     }
 
     public void addListViewItemOnClickListener(){
+
+        AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> {
+            Intent intent = new Intent(ContextUtil
+                    .getContextFromBinding(this.activityTableOfContentsBinding), DetailsActivity.class);
+            intent.putExtra("concept", this.concepts.get(position));
+            ContextUtil.startActivityFromBinding(activityTableOfContentsBinding,intent);
+        };
+
         this.activityTableOfContentsBinding
-                .androidHandbookList.setOnItemClickListener((parent, view, position, id) -> {
-                    Intent intent = new Intent(ContextUtil
-                            .getContextFromBinding(this.activityTableOfContentsBinding), DetailsActivity.class);
-                    intent.putExtra("concept", this.concepts.get(position));
-                    ContextUtil.startActivityFromBinding(activityTableOfContentsBinding,intent);
-        });
+                .androidHandbookList.setOnItemClickListener(onItemClickListener);
     }
 }

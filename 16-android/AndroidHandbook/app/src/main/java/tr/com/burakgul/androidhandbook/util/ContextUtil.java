@@ -15,6 +15,6 @@ public class ContextUtil {
     }
 
     public static void  startActivityFromBinding(ViewBinding binding, Intent intent){
-        binding.getRoot().getContext().startActivity(intent);
+        getContextFromBinding(binding).startActivity(intent);
     }
 }

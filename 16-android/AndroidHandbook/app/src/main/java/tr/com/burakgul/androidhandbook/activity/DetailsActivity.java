@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import tr.com.burakgul.androidhandbook.databinding.ActivityDetailsBinding;
+import tr.com.burakgul.androidhandbook.model.Concept;
 import tr.com.burakgul.androidhandbook.service.DetailsService;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(bundle);
         ActivityDetailsBinding binding = ActivityDetailsBinding.inflate(super.getLayoutInflater());
         super.setContentView(binding.getRoot());
-        this.detailsService = new DetailsService(binding);
+        this.detailsService = new DetailsService(binding, (Concept) super.getIntent().getSerializableExtra("concept"));
+        this.detailsService.initializeContent();
     }
 }
